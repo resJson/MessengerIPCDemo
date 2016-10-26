@@ -13,18 +13,18 @@
         android:padding="10dp">
 
         <TextView
-            android:id="@+id/tv_messenger_ipc"
-            android:layout_width="wrap_content"
-            android:layout_height="50dp"
-            android:gravity="center"
-            android:text="Messenger IPC通信" />
-
-        <TextView
             android:id="@+id/tv_aidl_ipc"
             android:layout_width="wrap_content"
             android:layout_height="50dp"
             android:gravity="center"
             android:text="aidl IPC通信" />
+
+        <TextView
+            android:id="@+id/tv_aidl_add_ipc"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:gravity="center"
+            android:text="aidl IPC通信添加调用" />
 
     </LinearLayout>
 

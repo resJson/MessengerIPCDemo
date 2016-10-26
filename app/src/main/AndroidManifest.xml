@@ -18,7 +18,7 @@
 
         <activity android:name=".MessengerIPCActivity" />
 
-        <activity android:name=".AidlIpcActivit" />
+        <activity android:name=".AIDLIpcActivit" />
 
         <service android:name="resjson.com.testdemo.MessengerIPCService"
             android:process=":remote"/>

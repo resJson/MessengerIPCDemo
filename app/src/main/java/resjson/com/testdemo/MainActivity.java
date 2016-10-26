@@ -29,7 +29,7 @@ public class MainActivity extends Activity {
         tv_aidl_ipc.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, MessengerIPCActivity.class);
+                Intent intent = new Intent(MainActivity.this, AIDLIpcActivit.class);
                 startActivity(intent);
             }
         });

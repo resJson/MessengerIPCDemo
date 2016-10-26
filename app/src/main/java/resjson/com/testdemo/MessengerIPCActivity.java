@@ -17,7 +17,7 @@ import android.widget.Toast;
 
 public class MessengerIPCActivity extends Activity {
 
-    private TextView tv_ipc;
+    private TextView tv_messenger_ipc;
 
     private Messenger mService;
 
@@ -51,12 +51,12 @@ public class MessengerIPCActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.messenger_ipc);
         Intent intent = new Intent(this, MessengerIPCService.class);
         bindService(intent, mServiceConnection, Context.BIND_AUTO_CREATE);
 
-        tv_ipc = (TextView) findViewById(R.id.tv_ipc);
-        tv_ipc.setOnClickListener(new View.OnClickListener() {
+        tv_messenger_ipc = (TextView) findViewById(R.id.tv_messenger_ipc);
+        tv_messenger_ipc.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Message message = Message.obtain(null, 2);
