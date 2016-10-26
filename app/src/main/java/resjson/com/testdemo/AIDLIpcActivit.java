@@ -24,8 +24,6 @@ import resjson.com.testdemo.aidl.IBookManager;
 
 public class AIDLIpcActivit extends Activity {
 
-    private static final  String TAG = "AIDLIpcActivit";
-
     public TextView tv_aidl_ipc;
     public TextView tv_aidl_add_ipc;
 

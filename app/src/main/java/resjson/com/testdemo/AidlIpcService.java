@@ -19,8 +19,6 @@ import resjson.com.testdemo.aidl.IBookManager;
 
 public class AidlIpcService extends Service {
 
-    private static final  String TAG = "AidlIpcService";
-
     private CopyOnWriteArrayList<Book> mBookList = new CopyOnWriteArrayList<>();
 
     private Binder mBinder = new IBookManager.Stub(){
@@ -40,6 +38,11 @@ public class AidlIpcService extends Service {
         super.onCreate();
         mBookList.add(new Book(1, "Android"));
         mBookList.add(new Book(2, "iOS"));
+    }
+
+    @Override
+    public int onStartCommand(Intent intent, int flags, int startId) {
+        return super.onStartCommand(intent, flags, startId);
     }
 
     @Override
