@@ -1,0 +1,5 @@
+# MessengerIPCDemo
+使用Messenger进行不同进程的IPC数据通讯
+
+
+主要针对Messenger、aidl文件方式进行IPC数据通信功能，只是简单的Demo代码
