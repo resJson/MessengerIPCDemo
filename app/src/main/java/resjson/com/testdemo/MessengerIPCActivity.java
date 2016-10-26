@@ -15,7 +15,7 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class ResMainActivity extends Activity {
+public class MessengerIPCActivity extends Activity {
 
     private TextView tv_ipc;
 
@@ -40,7 +40,7 @@ public class ResMainActivity extends Activity {
         public void handleMessage(Message msg) {
             switch (msg.what){
                 case 3:
-                    Toast.makeText(ResMainActivity.this, msg.getData().getString("reply"), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MessengerIPCActivity.this, msg.getData().getString("reply"), Toast.LENGTH_SHORT).show();
                     break;
                 default:
                     super.handleMessage(msg);
@@ -52,7 +52,7 @@ public class ResMainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Intent intent = new Intent(this, MessageService.class);
+        Intent intent = new Intent(this, MessengerIPCService.class);
         bindService(intent, mServiceConnection, Context.BIND_AUTO_CREATE);
 
         tv_ipc = (TextView) findViewById(R.id.tv_ipc);

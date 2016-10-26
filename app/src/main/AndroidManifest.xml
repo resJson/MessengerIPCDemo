@@ -16,11 +16,14 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".ResMainActivity" >
+        <activity android:name=".MessengerIPCActivity" />
 
-        </activity>
+        <activity android:name=".AidlIpcActivit" />
 
-        <service android:name="resjson.com.testdemo.MessageService"
+        <service android:name="resjson.com.testdemo.MessengerIPCService"
+            android:process=":remote"/>
+
+        <service android:name="resjson.com.testdemo.AidlIpcService"
             android:process=":remote"/>
 
     </application>

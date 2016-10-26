@@ -8,19 +8,28 @@ import android.widget.TextView;
 
 public class MainActivity extends Activity {
 
-    private TextView tv_ipc;
-    private String str = "童信息：\r\n酒店房间—占床位的儿童需按照成人安排。\r\n酒店早餐—身";
+    private TextView tv_messenger_ipc;
+    private TextView tv_aidl_ipc;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        tv_ipc = (TextView) findViewById(R.id.tv_ipc);
-        tv_ipc.setText(str);
-        tv_ipc.setOnClickListener(new View.OnClickListener() {
+        // Messenger IPC通信
+        tv_messenger_ipc = (TextView) findViewById(R.id.tv_messenger_ipc);
+        tv_messenger_ipc.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, ResMainActivity.class);
+                Intent intent = new Intent(MainActivity.this, MessengerIPCActivity.class);
+                startActivity(intent);
+            }
+        });
+        // AIDL IPC通信
+        tv_aidl_ipc = (TextView) findViewById(R.id.tv_aidl_ipc);
+        tv_aidl_ipc.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, MessengerIPCActivity.class);
                 startActivity(intent);
             }
         });
