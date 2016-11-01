@@ -4,6 +4,7 @@ import android.app.Service;
 import android.content.Intent;
 import android.os.Binder;
 import android.os.IBinder;
+import android.os.RemoteCallbackList;
 import android.os.RemoteException;
 import android.widget.Toast;
 
@@ -23,8 +24,8 @@ import resjson.com.testdemo.aidl.INewBookArrivedListener;
 public class AidlIpcService extends Service {
 
     private CopyOnWriteArrayList<Book> mBookList = new CopyOnWriteArrayList<>();
-
-    private CopyOnWriteArrayList<INewBookArrivedListener> mINewBookArrivedListener = new CopyOnWriteArrayList<>();
+    //RemoteCallbackList替换CopyOnWriteArrayList
+    private RemoteCallbackList<INewBookArrivedListener> mINewBookArrivedListener = new RemoteCallbackList<>();
 
     private AtomicBoolean isServiceDestoryed = new AtomicBoolean(false);
 
@@ -41,20 +42,12 @@ public class AidlIpcService extends Service {
 
         @Override
         public void registerLister(INewBookArrivedListener listener) throws RemoteException {
-            if(!mINewBookArrivedListener.contains(listener)){
-                mINewBookArrivedListener.add(listener);
-            }else{
-                Toast.makeText(AidlIpcService.this, "listener already is exists",Toast.LENGTH_SHORT).show();
-            }
+            mINewBookArrivedListener.register(listener);
         }
 
         @Override
         public void unRegistListener(INewBookArrivedListener listener) throws RemoteException {
-            if(mINewBookArrivedListener.contains(listener)){
-                mINewBookArrivedListener.remove(listener);
-            }else{
-                Toast.makeText(AidlIpcService.this, "listener not found",Toast.LENGTH_SHORT).show();
-            }
+            mINewBookArrivedListener.unregister(listener);
         }
     };
 
@@ -78,13 +71,18 @@ public class AidlIpcService extends Service {
                 int bookId = mBookList.size() + 1;
                 Book newBook = new Book(bookId, "new Book" + bookId);
                 mBookList.add(newBook);
-                for(int i = 0; i < mINewBookArrivedListener.size(); i++){
-                    try {
-                        mINewBookArrivedListener.get(i).onNewBookArrived(newBook);
-                    } catch (RemoteException e) {
-                        e.printStackTrace();
+                int N = mINewBookArrivedListener.beginBroadcast();
+                for(int i = 0; i < N; i++){
+                    INewBookArrivedListener listener = mINewBookArrivedListener.getBroadcastItem(i);
+                    if(listener != null){
+                        try {
+                            listener.onNewBookArrived(newBook);
+                        } catch (RemoteException e) {
+                            e.printStackTrace();
+                        }
                     }
                 }
+                mINewBookArrivedListener.finishBroadcast();
             }
         }
     }
